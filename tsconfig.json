@@ -11,6 +11,5 @@
     "baseUrl": "."
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules"],
-  "typeRoots": ["../node_modules/@types", "@types"]
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }

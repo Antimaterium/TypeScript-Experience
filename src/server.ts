@@ -1,9 +1,9 @@
-import app from "./App";
+import app from './App';
 
 const port = 3333;
 
-app.get("/", (req, res) => {
-  res.send("The sedulous hyena ate the antelope!");
+app.get('/', (req, res) => {
+  res.send('The sedulous hyena ate the antelope!');
 });
 
 app.listen(port, err => {
