@@ -1,6 +1,4 @@
-import express, { NextFunction, Request, Response } from "express";
-import Youch from "youch";
-import HttpException from "./exceptions/HttpException";
+import express from 'express';
 
 class App {
   public server: express.Application;
@@ -16,23 +14,15 @@ class App {
   }
 
   private exceptionHandler() {
-    this.server.use(
-      async (
-        err: HttpException,
-        req: Request,
-        res: Response,
-        next: NextFunction
-      ) => {
-        const env = process.env.NODE_ENV;
-        if (err && (env === "development" || env === "test")) {
-          console.log(err);
-          const errors = await new Youch(err, req).toJSON();
-          return res.status(500).json(errors);
-        }
-
-        return res.status(500).json({ error: "Internal Server Error" });
+    this.server.use(async (err, req, res, next) => {
+      const env = process.env.NODE_ENV;
+      if (err && (env === 'development' || env === 'test')) {
+        console.log(err);
+        return res.status(500).json(err);
       }
-    );
+
+      return res.status(500).json({ error: 'Internal Server Error' });
+    });
   }
 }
 
